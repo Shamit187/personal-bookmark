@@ -1,28 +1,20 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{web, App, HttpServer};
 
-#[get("/")]
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
-}
+mod app_scope;
 
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
-}
-
-async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey there!")
-}
+// trying out rust's web scope
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
-        App::new()
-            .service(index)
-            .service(echo)
-            .route("/hey", web::get().to(manual_hello))
+        App::new().service(
+            web::scope("/app")
+                .route("/1", web::get().to(app_scope::app1))
+                .route("/2", web::get().to(app_scope::app2))
+                .route("/3", web::get().to(app_scope::app3)),
+        )
     })
-    .bind(("127.0.0.1", 8000))?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }
