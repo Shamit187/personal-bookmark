@@ -1,25 +1,19 @@
-use actix_files as fs;
 use actix_web::{App, HttpServer};
-use std::collections::HashMap;
 
 mod api;
+mod file; // Import the file server module
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let mut directories = HashMap::new();
-    directories.insert("/", "./static");
-    directories.insert("/login", "./static/login");
-
-    HttpServer::new(move || {
+    HttpServer::new(|| {
         let mut app = App::new();
 
-        // add api routes
+        // Configure API routes
         app = app.configure(api::api_routes);
 
-        for (path, dir) in &directories {
-            app = app.service(fs::Files::new(path, dir).index_file("index.html"));
-        }
-        
+        // Configure file server routes
+        app = app.configure(file::frontend_routes);
+
         app
     })
     .bind("127.0.0.1:8080")?
