@@ -4,34 +4,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Homepage</title>
+  <title>Homepage</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Tailwind CSS and HTMX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.5.0"></script>
+
+  <style>
+    :root {
+      --bg-color: #222;
+      /* Default background color */
+      --text-color: #fff;
+      /* Default text color */
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    /* Dark mode */
+    .light-mode {
+      --bg-color: #fff;
+      /* Dark mode background color */
+      --text-color: #000;
+      /* Dark mode text color */
+    }
+  </style>
+  <script>
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('light-mode');
+    }
+  </script>
 </head>
 
 <body>
-  <header class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto px-4">
-      <h1 class="text-2xl font-bold">Welcome to My Homepage</h1>
+  <div id="hero" class="flex flex-col h-screen justify-start flex-1 p-4">
+    <div id="navbar" class="flex-none flex justify-between items-center p-4">
+      <a href="/about">About</a>
+      <a href="https://myanimelist.net/animelist/ShamitFatin">Anime List</a>
+      <div onclick="toggleDarkMode()" class="cursor-pointer"><img src="favicon.png" alt="MainLogo" class="h-10 w-10">
+      </div>
+      <a href="/art">Art Gallery</a>
+      <a href="/contact">Contact</a>
     </div>
-  </header>
-
-  <main class="container mx-auto px-4 py-8">
-    <h2 class="text-xl font-bold mb-4">About Me</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc sed tincidunt lacinia, velit
-      mauris
-      tincidunt urna, id aliquet nunc nisl id nunc. Sed euismod, nunc nec aliquet aliquam, justo nunc tincidunt
-      lectus,
-      nec aliquam nunc nunc nec nunc.</p>
-      <img src="image.jpg" alt="Nature" class="mt-4 h-20">
-  </main>
-
-  <footer class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto px-4">
-      <p class="text-center">© 2022 My Homepage. All rights reserved.</p>
+    <div id="hero-content" class="flex-1 p-4">
+      <div class="h-full flex flex-col items-start justify-center">
+        <p class="text-5xl mb-8">
+          Welcome to my website!
+        </p>
+        <p class="text-2xl mb-8">
+          This is a simple website made with Tailwind CSS and HTMX.
+        </p>
+      </div>
     </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.5.0"></script>
+  </div>
 </body>
 
 </html>
