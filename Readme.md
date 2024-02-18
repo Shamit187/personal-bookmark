@@ -65,7 +65,9 @@ async fn main() -> std::io::Result<()> {
 
 Why use scope?
 
-- It allows you to group routes together
-- It allows you to apply middleware to a group of routes
-- **It allows you to apply data to a group of routes**
+- Group
+- Guard
+- Data
+
+## Too much learning, time for implementation
 
