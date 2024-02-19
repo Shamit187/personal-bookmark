@@ -6,61 +6,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage</title>
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="animation.css">
 
   <!-- Tailwind CSS and HTMX -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.5.0"></script>
 
+  <!-- Extra Style Class -->
   <style>
-    :root {
-      --bg-color: #222;
-      /* Default background color */
-      --text-color: #fff;
-      /* Default text color */
+    .white-drop-shadow {
+      filter: drop-shadow(0 0 0.35rem rgba(255, 255, 255, 0));
+      transition: filter 0.3s ease, color 0.3s ease;
     }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
+    .white-drop-shadow:hover {
+      filter: drop-shadow(0 0 1rem rgb(255, 255, 255));
+      color: #fff; /* This will make the text color white on hover */
     }
 
-    /* Dark mode */
-    .light-mode {
-      --bg-color: #fff;
-      /* Dark mode background color */
-      --text-color: #000;
-      /* Dark mode text color */
+    .white-drop-shadow-lg {
+      filter: drop-shadow(0 0 0.1rem rgba(255, 255, 255, 0.3));
+      transition: filter 0.3s ease, color 0.3s ease;
+    }
+
+    .white-drop-shadow-lg:hover {
+      filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.5));
+      color: #fff; /* This will make the text color white on hover */
+    }
+
+    .navbar-link:not(:last-child)::after {
+      content: "|";
+      margin-left: 20px;
+      margin-right: 20px;
     }
   </style>
-  <script>
-    function toggleDarkMode() {
-      const body = document.body;
-      body.classList.toggle('light-mode');
-    }
-  </script>
 </head>
 
-<body>
-  <div id="hero" class="flex flex-col h-screen justify-start flex-1 p-4">
-    <div id="navbar" class="flex-none flex justify-between items-center p-4">
-      <a href="/about">About</a>
-      <a href="https://myanimelist.net/animelist/ShamitFatin">Anime List</a>
-      <div onclick="toggleDarkMode()" class="cursor-pointer"><img src="favicon.png" alt="MainLogo" class="h-10 w-10">
-      </div>
-      <a href="/art">Art Gallery</a>
-      <a href="/contact">Contact</a>
-    </div>
-    <div id="hero-content" class="flex-1 p-4">
-      <div class="h-full flex flex-col items-start justify-center">
-        <p class="text-5xl mb-8">
-          Welcome to my website!
-        </p>
-        <p class="text-2xl mb-8">
-          This is a simple website made with Tailwind CSS and HTMX.
-        </p>
+<body class="bg-neutral-950">
+  <div id="navbar" class="fixed w-full text-gray-400 p-4 z-10">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold white-drop-shadow">Personal Bookmark</a>
+      <div>
+        <a href="/" class="white-drop-shadow navbar-link">Book List</a>
+        <a href="/" class="white-drop-shadow navbar-link">Art Gallery</a>
+        <a href="https://myanimelist.net/mangalist/ShamitFatin" class="white-drop-shadow navbar-link">Anime List</a>
+        <a href="/" class="white-drop-shadow navbar-link">About Me</a>
+        <a href="/" class="white-drop-shadow navbar-link">Contact</a>
       </div>
     </div>
   </div>
+  <div id="hero" class="h-screen w-1/2 transform translate-x-1/2 
+                        flex flex-col justify-center items-center
+                        text-gray-300">
+    <p class="flex-initial text-5xl my-5 font-bold text-center tracking-wide">JOIN ME ON A LITERARY JOURNEY</p>
+    <p class="flex-initial text-xl my-5 text-center">Welcome to my cozy corner of the internet! Dive into my collection,
+      track their
+      progress, and explore the notes I've left behind. Let's embark on adventures between the pages together</p>
+    <div class="flex-initial my-5 relative">
+      <input type="text" placeholder="Search" class="px-4 py-2 pl-5 border border-gray-500 bg-neutral-950 rounded-md white-drop-shadow-lg">
+      <button class="absolute top-1/2 transform translate-y-[-100%] right-0 mt-2 mr-5 text-white rounded-md ">
+        <img src="search.png" alt="search" class="w-4 h-4">
+      </button>
+    </div>
+    <a href="/" class="flex-initial px-4 py-2 bg-primary-500 rounded-md white-drop-shadow hover:tracking-wide">EXPLORE</a>
+  </div>
+
 </body>
 
 </html>
