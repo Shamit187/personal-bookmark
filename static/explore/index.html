@@ -10,7 +10,7 @@
     <style type="text/tailwindcss">
         @layer utilities {
           .subject-card {
-            @apply bg-gray-200 shadow-md rounded-lg p-4 h-40 xl:text-xl lg:text-base font-bold;
+            @apply bg-gray-200 shadow-md rounded-lg p-4 h-40 text-base xl:text-xl font-bold;
             filter: drop-shadow(0 0 0.35rem rgba(255, 255, 255, 0));
             transition: filter 0.3s ease, color 0.3s ease;
           }
@@ -28,8 +28,18 @@
             .svg-container {
       @apply absolute bottom-0 right-0 mr-4 mb-4;
     }
-
+        .spanner-3 {
+            @apply col-span-1 xl:col-span-3 ;
         }
+
+        .spanner-2 {
+            @apply col-span-1 xl:col-span-2 ;
+        }
+
+        .spanner-1 {
+            @apply col-span-1 xl:col-span-1 ;
+        }
+    }
       </style>
     <style>
         .white-drop-shadow {
@@ -45,8 +55,8 @@
 
         .navbar-link:not(:last-child)::after {
             content: "|";
-            margin-left: 20px;
-            margin-right: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
 
         /* WebKit */
@@ -74,13 +84,13 @@
 </head>
 
 <body class="bg-neutral-950">
-    <div id="navbar" class="fixed bg-neutral-950 shadow-md w-full text-gray-400 p-4 z-10">
-        <div class="container mx-auto flex justify-between items-center">
+    <div id="navbar" class="fixed bg-neutral-950 shadow-md w-full text-gray-400 p-1 lg:p-4 z-10">
+        <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center">
             <a href="/" class="text-2xl font-bold white-drop-shadow">Personal Bookmark</a>
-            <div>
+            <div class="text-sm lg:text-base">
                 <a href="/" class="white-drop-shadow navbar-link">Book List</a>
                 <a href="/" class="white-drop-shadow navbar-link">Art Gallery</a>
-                <a href="https://myanimelist.net/mangalist/ShamitFatin" class="white-drop-shadow navbar-link">Anime
+                <a href="https://myanimelist.net/animelist/ShamitFatin" class="white-drop-shadow navbar-link">Anime
                     List</a>
                 <a href="/" class="white-drop-shadow navbar-link">About Me</a>
                 <a href="/" class="white-drop-shadow navbar-link">Contact</a>
@@ -91,14 +101,14 @@
     <div id="main-content" class="pt-20 px-20 flex flex-col items-center">
         <h1 class="flex-none text-4xl font-bold text-gray-300 m-5">Explore</h1>
         <div class="grid xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-1 gap-8 w-5/6 m-5 mb-20">
-            <div class="bg-gray-500 col-span-2 subject-card">
+            <div class="bg-gray-500 spanner-2 subject-card">
                 Discrete Mathematics
                 <div class="svg-container">
                     <img src="explore/dis_math.png" class="w-10 h-10" alt="Discrete Mathematics">
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-2 subject-card">
+            <div class="bg-gray-500 spanner-2 subject-card">
                 Continuous Mathematics
                 <div class="svg-container">
                     <img src="explore/cont_math.png" class="w-10 h-10" alt="Continuous Mathematics">
@@ -119,28 +129,28 @@
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-2 subject-card">
+            <div class="bg-gray-500 spanner-2 subject-card">
                 Information and Communication
                 <div class="svg-container">
                     <img src="explore/inf.png" class="w-10 h-10" alt="Information and Communication">
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-2 subject-card">
+            <div class="bg-gray-500 spanner-2 subject-card">
                 Physics
                 <div class="svg-container">
                     <img src="explore/phy.png" class="w-10 h-10" alt="Physics">
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-2 subject-card">
+            <div class="bg-gray-500 spanner-2 subject-card">
                 Chemistry
                 <div class="svg-container">
                     <img src="explore/chem.png" class="w-10 h-10" alt="Chemistry">
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-3 subject-card">
+            <div class="bg-gray-500 spanner-3 subject-card">
                 Artificial Intelligence
                 <div class="svg-container">
                     <img src="explore/ai.png" class="w-10 h-10" alt="Artificial Intelligence">
@@ -154,7 +164,7 @@
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-3 subject-card">
+            <div class="bg-gray-500 spanner-3 subject-card">
                 Algorithm
                 <div class="svg-container">
                     <img src="explore/algo.png" class="w-10 h-10" alt="Algorithm">
@@ -168,7 +178,7 @@
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-2 subject-card">
+            <div class="bg-gray-500 spanner-2 subject-card">
                 Casual Non-Literature
                 <div class="svg-container">
                     <img src="explore/cas_non.png" class="w-10 h-10" alt="Casual Non-Literature">
@@ -182,7 +192,7 @@
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-2 subject-card">
+            <div class="bg-gray-500 spanner-2 subject-card">
                 Bangla Literature
                 <div class="svg-container">
                     <img src="explore/bangla.png" class="w-10 h-10" alt="Bangla Literature">
@@ -196,7 +206,7 @@
                 </div>
             </div>
 
-            <div class="bg-gray-500 col-span-3 subject-card">
+            <div class="bg-gray-500 spanner-3 subject-card">
                 Scientific Papers
                 <div class="svg-container">
                     <img src="explore/research.png" class="w-10 h-10" alt="Scientific Papers">
