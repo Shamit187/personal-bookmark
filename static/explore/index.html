@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Bookmark</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.5.0"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .subject-card {
+            @apply bg-gray-200 shadow-md rounded-lg p-4 h-40 xl:text-xl lg:text-base font-bold;
+            filter: drop-shadow(0 0 0.35rem rgba(255, 255, 255, 0));
+            transition: filter 0.3s ease, color 0.3s ease;
+          }
+
+          .subject-card:hover {
+            @apply cursor-pointer bg-white scale-105 transition-transform;
+            filter: drop-shadow(0 0 1rem rgb(255, 255, 255));
+            
+          }
+
+            .subject-card:active {
+                @apply bg-gray-300 scale-100;
+            }
+
+            .svg-container {
+      @apply absolute bottom-0 right-0 mr-4 mb-4;
+    }
+
+        }
+      </style>
+    <style>
+        .white-drop-shadow {
+            filter: drop-shadow(0 0 0.35rem rgba(255, 255, 255, 0));
+            transition: filter 0.3s ease, color 0.3s ease;
+        }
+
+        .white-drop-shadow:hover {
+            filter: drop-shadow(0 0 1rem rgb(255, 255, 255));
+            color: #fff;
+            /* This will make the text color white on hover */
+        }
+
+        .navbar-link:not(:last-child)::after {
+            content: "|";
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        /* WebKit */
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        * {
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body class="bg-neutral-950">
+    <div id="navbar" class="fixed bg-neutral-950 shadow-md w-full text-gray-400 p-4 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold white-drop-shadow">Personal Bookmark</a>
+            <div>
+                <a href="/" class="white-drop-shadow navbar-link">Book List</a>
+                <a href="/" class="white-drop-shadow navbar-link">Art Gallery</a>
+                <a href="https://myanimelist.net/mangalist/ShamitFatin" class="white-drop-shadow navbar-link">Anime
+                    List</a>
+                <a href="/" class="white-drop-shadow navbar-link">About Me</a>
+                <a href="/" class="white-drop-shadow navbar-link">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="pt-20 px-20 flex flex-col items-center">
+        <h1 class="flex-none text-4xl font-bold text-gray-300 m-5">Explore</h1>
+        <div class="grid xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-1 gap-8 w-5/6 m-5 mb-20">
+            <div class="bg-gray-500 col-span-2 subject-card">
+                Discrete Mathematics
+                <div class="svg-container">
+                    <img src="explore/dis_math.png" class="w-10 h-10" alt="Discrete Mathematics">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-2 subject-card">
+                Continuous Mathematics
+                <div class="svg-container">
+                    <img src="explore/cont_math.png" class="w-10 h-10" alt="Continuous Mathematics">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 subject-card">
+                Casual Technical
+                <div class="svg-container">
+                    <img src="explore/cas_tech.png" class="w-10 h-10" alt="Casual Technical">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 subject-card">
+                Quantum Computing
+                <div class="svg-container">
+                    <img src="explore/quant.png" class="w-10 h-10" alt="Quantum Computing">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-2 subject-card">
+                Information and Communication
+                <div class="svg-container">
+                    <img src="explore/inf.png" class="w-10 h-10" alt="Information and Communication">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-2 subject-card">
+                Physics
+                <div class="svg-container">
+                    <img src="explore/phy.png" class="w-10 h-10" alt="Physics">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-2 subject-card">
+                Chemistry
+                <div class="svg-container">
+                    <img src="explore/chem.png" class="w-10 h-10" alt="Chemistry">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-3 subject-card">
+                Artificial Intelligence
+                <div class="svg-container">
+                    <img src="explore/ai.png" class="w-10 h-10" alt="Artificial Intelligence">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 subject-card">
+                Biology
+                <div class="svg-container">
+                    <img src="explore/bio.png" class="w-10 h-10" alt="Biology">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-3 subject-card">
+                Algorithm
+                <div class="svg-container">
+                    <img src="explore/algo.png" class="w-10 h-10" alt="Algorithm">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 subject-card">
+                Japanese Literature
+                <div class="svg-container">
+                    <img src="explore/jap.png" class="w-10 h-10" alt="Japanese Literature">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-2 subject-card">
+                Casual Non-Literature
+                <div class="svg-container">
+                    <img src="explore/cas_non.png" class="w-10 h-10" alt="Casual Non-Literature">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 subject-card">
+                Manga
+                <div class="svg-container">
+                    <img src="explore/manga.png" class="w-10 h-10" alt="Manga">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-2 subject-card">
+                Bangla Literature
+                <div class="svg-container">
+                    <img src="explore/bangla.png" class="w-10 h-10" alt="Bangla Literature">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 subject-card">
+                English Literature
+                <div class="svg-container">
+                    <img src="explore/eng.png" class="w-10 h-10" alt="English Literature">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 col-span-3 subject-card">
+                Scientific Papers
+                <div class="svg-container">
+                    <img src="explore/research.png" class="w-10 h-10" alt="Scientific Papers">
+                </div>
+            </div>
+
+            <div class="bg-gray-500 subject-card">
+                Others
+                <div class="svg-container">
+                    <img src="explore/misc.png" class="w-10 h-10" alt="Others">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="fixed bottom-0 w-full bg-neutral-950 text-gray-400 p-4 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <p class="text-sm">© 2024 Personal Bookmark</p>
+            </div>
+            <div>
+                <p class="text-sm">Made with ❤️ by Shamit Fatin</p>
+            </div>
+        </div>
+</body>
+
+</html>
