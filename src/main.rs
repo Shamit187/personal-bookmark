@@ -8,13 +8,14 @@ mod note;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // read port from environment variable
+    // Read port from environment variable
     dotenv().ok();
     let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
     let address = format!("0.0.0.0:{}", port);
 
-    println!("Starting server on: {}", &address);
 
+    // Start the server
+    println!("Starting server on: {}", &address);
     HttpServer::new(|| {
         let mut app = App::new();
 

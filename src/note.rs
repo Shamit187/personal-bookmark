@@ -2,6 +2,9 @@ use actix_web::{get, web, HttpResponse, Result};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::fs;
+use std::env;
+use futures::stream::TryStreamExt;
+use mongodb::{bson::doc};
 
 #[derive(Deserialize, Debug)]
 struct Info {
@@ -24,6 +27,25 @@ struct Note {
     subchapter: u32,
     content: Vec<NoteContent>,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+struct TableOfContent {
+    book_id: u32,
+    title: String,
+    chapter: Vec<Chapter>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+struct Chapter {
+    chapter_title: String,
+    subchapter: Vec<SubChapter>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+struct SubChapter {
+    subchapter_title: String,
+}
+
 
 fn generate_note(contents: Vec<NoteContent>) -> Result<String, serde_json::Error> {
     let mut text = String::new();
@@ -105,7 +127,18 @@ async fn index(_info: web::Path<Info>) -> Result<HttpResponse> {
         _info.book_id, _info.chapter, _info.subchapter
     );
 
+    // Read from database
+    let mongodb_uri = env::var("MONGOURI").expect("MONGODB_URI must be set");
+    let client = mongodb::Client::with_uri_str(&mongodb_uri).await.unwrap();
+    let db = client.database("personal-bookmark");
+    let collection = db.collection::<TableOfContent>("toc");
+    let mut cursor = collection.find(doc! {}, None).await.unwrap();
+    while let Some(result) = cursor.try_next().await.unwrap(){
+        println!("{:?}", result);
+    }
+
     // In future all will come from database
+
     let json_note = fs::read_to_string("template/note_content.json")?;
     let note: Note = serde_json::from_str(&json_note)?;
     let note_html = generate_note(note.content)?;
