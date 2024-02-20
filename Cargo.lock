@@ -776,6 +776,7 @@ dependencies = [
  "actix-files",
  "actix-web",
  "dotenv",
+ "serde",
 ]
 
 [[package]]
