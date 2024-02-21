@@ -1,9 +1,11 @@
 use actix_web::{get, web, HttpResponse, Result};
+use actix_files;
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::env;
 use futures::stream::TryStreamExt;
-use mongodb::{bson::doc};
+use mongodb::bson::doc;
+
 
 #[derive(Deserialize, Debug)]
 struct Info {
@@ -68,6 +70,7 @@ fn generate_note(contents: Vec<NoteContent>) -> Result<String, serde_json::Error
     Ok(text)
 }
 
+
 fn generate_table_of_content(toc: &TableOfContent) -> String {
     let title = &toc.title;
     let book_id = toc.book_id;
@@ -122,6 +125,8 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
     let mongodb_uri = env::var("MONGOURI").expect("MONGODB_URI must be set");
     let client = mongodb::Client::with_uri_str(&mongodb_uri).await.unwrap();
     let db = client.database("personal-bookmark");
+
+    // fetch table of content
     let collection = db.collection::<TableOfContent>("toc");
     let mut cursor = collection.find(doc! {"book_id" : info.book_id}, None).await.unwrap();
     let table_of_content = match cursor.try_next().await {
@@ -145,9 +150,46 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
     };
     let toc_html = generate_table_of_content(&table_of_content);
 
-    // In future all will come from database
-    let json_note = fs::read_to_string("template/note_content.json")?;
-    let note: Note = serde_json::from_str(&json_note)?;
+    // fetch actual note content
+    let collection = db.collection::<Note>("note");
+    let mut cursor = collection
+        .find(doc! {"book_id" : info.book_id, "chapter" : info.chapter, "subchapter" : info.subchapter}, None)
+        .await
+        .unwrap();
+    let note = match cursor.try_next().await {
+        Ok(Some(note)) => note,
+        Ok(None) => {
+            println!(
+                "No note found for book_id: {} chapter: {} subchapter: {}",
+                info.book_id, info.chapter, info.subchapter
+            );
+            Note {
+                book_id: info.book_id,
+                chapter: info.chapter,
+                subchapter: info.subchapter,
+                content: vec![
+                    NoteContent {
+                        content_type: String::from("head"),
+                        content: String::from("Sorry, no content found 😔"),
+                    }
+                ],
+            }
+        }
+        Err(e) => {
+            println!("Error querying the database: {}", e);
+            Note {
+                book_id: info.book_id,
+                chapter: info.chapter,
+                subchapter: info.subchapter,
+                content: vec![
+                    NoteContent {
+                        content_type: String::from("head"),
+                        content: String::from("Sorry, no content found 😔"),
+                    }
+                ],
+            }
+        }
+    };
     let note_html = generate_note(note.content)?;
 
     // Generate HTML content dynamically
@@ -156,13 +198,19 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
         note_top_html, toc_html, note_middle_html, note_html, note_bottom_content
     );
 
-    // Closing database connection
-
     Ok(HttpResponse::Ok()
         .content_type("text/html")
         .body(html_content))
 }
 
+#[get("/favicon.ico")]
+async fn favicon() -> Result<actix_files::NamedFile> {
+    Ok(actix_files::NamedFile::open("static/favicon.png")?)
+}
+
+
 pub fn note_routes(cfg: &mut web::ServiceConfig) {
-    cfg.service(index);
+    cfg
+    .service(favicon)
+    .service(index);
 }
