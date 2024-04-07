@@ -5,6 +5,7 @@ use dotenv::dotenv;
 mod api;
 mod file; // Import the file server module
 mod note;
+mod markdown_to_html;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -30,6 +31,7 @@ async fn main() -> std::io::Result<()> {
         app = app.configure(api::api_routes);
 
         // Configure note routes next
+        // need to add stuff here
         app = app.configure(note::note_routes);
 
         // Configure file server routes last

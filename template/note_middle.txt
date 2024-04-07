@@ -1,28 +1,30 @@
-</div>
-<div class="flex flex-col items-start justify-center">
-<div class="w-4 h-4 bg-gray-300 dark:bg-gray-800">
-<div class="w-4 h-4 rounded-bl-lg bg-gray-300 dark:bg-gray-950">
-</div>
-</div>
-<div>
-<!-- Collapse Button -->
-<button id="collapseBtn" class="w-12 h-24
-bg-gray-300 dark:bg-gray-800 text-gray-800 font-bold py-2 px-4 ml-0 rounded-r-lg "
-onclick="collapseSidebar()">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAyElEQVR4nO2ZMQpCMRBEnydURLHQs1soCh+9gcKImMLiFz9hN6SYB4E0A7PkVVkwpj+CveApuAk2WZlUBCvBQ6ByXoJDdKYLgumv1NJhqjPpCLalyOJiLZkuCHYzxd6CU2SmC/Iw+GXSsWZYs3ysGdYsH2uGNcvHmmHN8rFmDKhZ+VmZK3WMzKTiIfBLxGGdsE5xWCesUxzWCesUh3XCOsVhnRhHp3XDMrQ6k47g2rCers6kI7jXFmrJpKOfJhfB+XvPyhjDuHwAusAr1c0FLMEAAAAASUVORK5CYII="
-class="w-6 h-6" alt="Collapse">
-</button>
-</div>
-<div class="w-4 h-4 bg-gray-300 dark:bg-gray-800">
-<div class="w-4 h-4 rounded-tl-lg bg-gray-300 dark:bg-gray-950">
-</div>
-</div>
-</div>
-<div class="h-[92vh] flex-1 p-10 overflow-x-auto
-flex flex-row
-items-start justify-center
-bg-gray-100 dark:bg-gray-950
-text-gray-800 dark:text-gray-200">
-<!-- Main body -->
-<div class="w-3/4">
-<!-- Auto-generated content -->
+            <!-- Auto-generated content -->
+            </div>
+            <div class="flex flex-col items-start justify-center">
+                <div class="w-4 h-4 bg-gray-300 dark:bg-gray-800">
+                    <div class="w-4 h-4 rounded-bl-lg bg-gray-300 dark:bg-gray-950">
+                    </div>
+                </div>
+                <div>
+                    <!-- Collapse Button -->
+                    <button id="collapseBtn" class="w-12 h-24
+                            bg-gray-300 dark:bg-gray-800 text-gray-800 font-bold py-2 px-4 ml-0 rounded-r-lg "
+                        onclick="collapseSidebar()">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAyElEQVR4nO2ZMQpCMRBEnydURLHQs1soCh+9gcKImMLiFz9hN6SYB4E0A7PkVVkwpj+CveApuAk2WZlUBCvBQ6ByXoJDdKYLgumv1NJhqjPpCLalyOJiLZkuCHYzxd6CU2SmC/Iw+GXSsWZYs3ysGdYsH2uGNcvHmmHN8rFmDKhZ+VmZK3WMzKTiIfBLxGGdsE5xWCesUxzWCesUh3XCOsVhnRhHp3XDMrQ6k47g2rCers6kI7jXFmrJpKOfJhfB+XvPyhjDuHwAusAr1c0FLMEAAAAASUVORK5CYII="
+                            class="w-6 h-6" alt="Collapse">
+                    </button>
+                </div>
+                <div class="w-4 h-4 bg-gray-300 dark:bg-gray-800">
+                    <div class="w-4 h-4 rounded-tl-lg bg-gray-300 dark:bg-gray-950">
+                    </div>
+                </div>
+            </div>
+            <div class="h-[92vh] flex-1 p-10 overflow-x-auto
+                        flex flex-row
+                        items-start justify-center
+                        bg-gray-100 dark:bg-gray-950
+                        text-gray-800 dark:text-gray-200"
+                id="main_content">
+                <!-- Main body -->
+                <div class="w-full md:w-3/4 flex flex-col space-y-6">
+                    <!-- Auto-generated content -->
