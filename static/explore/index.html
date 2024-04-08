@@ -43,7 +43,7 @@
                 @apply col-span-1 xl:col-span-5 ;
             }
             .book-list {
-                @apply bg-gray-200 shadow-md rounded-lg p-4 h-40 text-base xl:text-xl font-bold hidden;
+                @apply bg-gray-200 shadow-md rounded-lg p-4 h-auto text-base xl:text-xl font-bold hidden;
                 filter: drop-shadow(0 0 0.35rem rgba(255, 255, 255, 0));
             }
             .book-list.revealed{
@@ -92,7 +92,7 @@
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Function to toggle visibility of book list
             function toggleVisibility(target) {
                 target.classList.toggle('revealed');
@@ -104,15 +104,15 @@
 
             function fetchAndReplaceContent(target, url) {
                 fetch(url)
-                .then(response => {
-                    console.log(response);
-                    return response.text();
-                })
-                .then(html => {
-                    console.log(html);
-                    replaceTargetContent(target, html)
-                })
-                .catch(error => console.error('Error fetching content:', error));
+                    .then(response => {
+                        console.log(response);
+                        return response.text();
+                    })
+                    .then(html => {
+                        console.log(html);
+                        replaceTargetContent(target, html)
+                    })
+                    .catch(error => console.error('Error fetching content:', error));
             }
 
             // discrete, continuous, casual technical
@@ -122,15 +122,15 @@
             const discreteContCasualTarget = document.getElementById('discrete-cont-casual-target');
 
             // Add click event listeners to each subject card
-            discreteMathCard.addEventListener('click', function() {
+            discreteMathCard.addEventListener('click', function () {
                 toggleVisibility(discreteContCasualTarget);
                 fetchAndReplaceContent(discreteContCasualTarget, '/api/discrete-math');
             });
-            continuousMathCard.addEventListener('click', function() {
+            continuousMathCard.addEventListener('click', function () {
                 toggleVisibility(discreteContCasualTarget);
                 fetchAndReplaceContent(discreteContCasualTarget, '/api/continuous-math');
             });
-            casualTechnicalCard.addEventListener('click', function() {
+            casualTechnicalCard.addEventListener('click', function () {
                 toggleVisibility(discreteContCasualTarget);
                 fetchAndReplaceContent(discreteContCasualTarget, '/api/casual-technical');
             });
@@ -142,15 +142,15 @@
 
             const quantumInfPhyTarget = document.getElementById('quantum-inf-phy-target');
 
-            quantumComputingCard.addEventListener('click', function() {
+            quantumComputingCard.addEventListener('click', function () {
                 toggleVisibility(quantumInfPhyTarget);
                 fetchAndReplaceContent(quantumInfPhyTarget, '/api/quantum-computing');
             });
-            infCommunicationCard.addEventListener('click', function() {
+            infCommunicationCard.addEventListener('click', function () {
                 toggleVisibility(quantumInfPhyTarget);
                 fetchAndReplaceContent(quantumInfPhyTarget, '/api/inf-communication');
             });
-            physicsCard.addEventListener('click', function() {
+            physicsCard.addEventListener('click', function () {
                 toggleVisibility(quantumInfPhyTarget);
                 fetchAndReplaceContent(quantumInfPhyTarget, '/api/physics');
             });
@@ -161,12 +161,12 @@
 
             const chemAiTarget = document.getElementById('chem-ai-target');
 
-            chemistryCard.addEventListener('click', function() {
+            chemistryCard.addEventListener('click', function () {
                 toggleVisibility(chemAiTarget);
                 fetchAndReplaceContent(chemAiTarget, '/api/chemistry');
             });
 
-            aiCard.addEventListener('click', function() {
+            aiCard.addEventListener('click', function () {
                 toggleVisibility(chemAiTarget);
                 fetchAndReplaceContent(chemAiTarget, '/api/ai');
             });
@@ -178,17 +178,17 @@
 
             const bioAlgoJapaneseTarget = document.getElementById('bio-algo-japanese-target');
 
-            bioCard.addEventListener('click', function() {
+            bioCard.addEventListener('click', function () {
                 toggleVisibility(bioAlgoJapaneseTarget);
                 fetchAndReplaceContent(bioAlgoJapaneseTarget, '/api/bio');
             });
 
-            algoCard.addEventListener('click', function() {
+            algoCard.addEventListener('click', function () {
                 toggleVisibility(bioAlgoJapaneseTarget);
                 fetchAndReplaceContent(bioAlgoJapaneseTarget, '/api/algo');
             });
 
-            japaneseLiteratureCard.addEventListener('click', function() {
+            japaneseLiteratureCard.addEventListener('click', function () {
                 toggleVisibility(bioAlgoJapaneseTarget);
                 fetchAndReplaceContent(bioAlgoJapaneseTarget, '/api/japanese-literature');
             });
@@ -200,17 +200,17 @@
 
             const casualNonLitMangaBanglaTarget = document.getElementById('casual-non-lit-manga-bangla-target');
 
-            casualNonLiteratureCard.addEventListener('click', function() {
+            casualNonLiteratureCard.addEventListener('click', function () {
                 toggleVisibility(casualNonLitMangaBanglaTarget);
                 fetchAndReplaceContent(casualNonLitMangaBanglaTarget, '/api/casual-non-lit');
             });
 
-            mangaCard.addEventListener('click', function() {
+            mangaCard.addEventListener('click', function () {
                 toggleVisibility(casualNonLitMangaBanglaTarget);
                 fetchAndReplaceContent(casualNonLitMangaBanglaTarget, '/api/manga');
             });
 
-            banglaLiteratureCard.addEventListener('click', function() {
+            banglaLiteratureCard.addEventListener('click', function () {
                 toggleVisibility(casualNonLitMangaBanglaTarget);
                 fetchAndReplaceContent(casualNonLitMangaBanglaTarget, '/api/bangla');
             });
@@ -223,17 +223,17 @@
 
             const englishResearchOthersTarget = document.getElementById('english-research-others-target');
 
-            englishLiteratureCard.addEventListener('click', function() {
+            englishLiteratureCard.addEventListener('click', function () {
                 toggleVisibility(englishResearchOthersTarget);
                 fetchAndReplaceContent(englishResearchOthersTarget, '/api/english');
             });
 
-            researchCard.addEventListener('click', function() {
+            researchCard.addEventListener('click', function () {
                 toggleVisibility(englishResearchOthersTarget);
                 fetchAndReplaceContent(englishResearchOthersTarget, '/api/research');
             });
 
-            othersCard.addEventListener('click', function() {
+            othersCard.addEventListener('click', function () {
                 toggleVisibility(englishResearchOthersTarget);
                 fetchAndReplaceContent(englishResearchOthersTarget, '/api/others');
             });
@@ -282,7 +282,6 @@
             </div>
 
             <div class="spanner-5 book-list" id="discrete-cont-casual-target">
-                Target for Discrete Mathematics, Continuous Mathematics, Casual Technical
             </div>
 
             <div class="bg-gray-500 subject-card" id="quantum-computing">
@@ -307,7 +306,7 @@
             </div>
 
             <div class="bg-gray-500 spanner-5 book-list" id="quantum-inf-phy-target">
-                Target for Quantum Computing, Information and Communication, Physics
+
             </div>
 
             <div class="bg-gray-500 spanner-2 subject-card" id="chemistry">
@@ -325,7 +324,6 @@
             </div>
 
             <div class="bg-gray-500 spanner-5 book-list" id="chem-ai-target">
-                Target for Chemistry, Artificial Intelligence
             </div>
 
             <div class="bg-gray-500 subject-card" id="bio">
@@ -350,7 +348,6 @@
             </div>
 
             <div class="bg-gray-500 spanner-5 book-list" id="bio-algo-japanese-target">
-                Target for Biology, Algorithm and Japanese Literature
             </div>
 
             <div class="bg-gray-500 spanner-2 subject-card" id="casual-non-lit">
@@ -375,7 +372,6 @@
             </div>
 
             <div class="bg-gray-500 spanner-5 book-list" id="casual-non-lit-manga-bangla-target">
-                Target for Casual Non-Literature, Manga, Bangla Literature
             </div>
 
             <div class="bg-gray-500 subject-card" id="english">
@@ -400,7 +396,6 @@
             </div>
 
             <div class="bg-gray-500 spanner-5 book-list" id="english-research-others-target">
-                Target for English Literature, Scientific Papers, Others
             </div>
         </div>
     </div>
