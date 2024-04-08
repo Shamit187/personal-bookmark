@@ -101,7 +101,7 @@
                 @apply bg-gray-200 dark:bg-gray-700 p-4 rounded shadow;
             }
             .mobile_hidden{
-                @apply hidden md:block;
+                @apply hidden md:block md:w-100;
             }
         }   
     </style>

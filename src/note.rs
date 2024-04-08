@@ -116,6 +116,17 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
     };
     let toc_html = generate_table_of_content(book);
 
+    // if content_id is 0, return the table of content
+    if info.content_id == 0 {
+        let html_content = format!(
+            "{} {} {} {}",
+            note_top_html, toc_html, note_middle_html, note_bottom_content
+        );
+        return Ok(HttpResponse::Ok()
+            .content_type("text/html")
+            .body(html_content));
+    }
+
     // fetch actual note content
     let collection = db.collection::<ContentItem>("contents");
     let mut cursor = collection
