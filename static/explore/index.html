@@ -25,22 +25,10 @@
                 @apply bg-gray-300 scale-100;
             }
             .svg-container {
-                @apply absolute bottom-0 right-0 mr-4 mb-4;
+                @apply absolute bottom-0 right-0 mr-4 mb-4 text-xs xl:text-base font-normal;
             }
-            .spanner-3 {
-                @apply col-span-1 xl:col-span-3 ;
-            }
-            .spanner-2 {
-                @apply col-span-1 xl:col-span-2 ;
-            }
-            .spanner-1 {
+            .spanner {
                 @apply col-span-1 xl:col-span-1 ;
-            }
-            .spanner-4 {
-                @apply col-span-1 xl:col-span-4 ;
-            }
-            .spanner-5 {
-                @apply col-span-1 xl:col-span-5 ;
             }
             .book-list {
                 @apply bg-gray-200 shadow-md rounded-lg p-4 h-auto text-base xl:text-xl font-bold hidden;
@@ -91,155 +79,6 @@
             /* Firefox */
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Function to toggle visibility of book list
-            function toggleVisibility(target) {
-                target.classList.toggle('revealed');
-            }
-
-            function replaceTargetContent(target, html) {
-                target.innerHTML = html;
-            }
-
-            function fetchAndReplaceContent(target, url) {
-                fetch(url)
-                    .then(response => {
-                        console.log(response);
-                        return response.text();
-                    })
-                    .then(html => {
-                        console.log(html);
-                        replaceTargetContent(target, html)
-                    })
-                    .catch(error => console.error('Error fetching content:', error));
-            }
-
-            // discrete, continuous, casual technical
-            const discreteMathCard = document.getElementById('discrete-math');
-            const continuousMathCard = document.getElementById('continuous-math');
-            const casualTechnicalCard = document.getElementById('casual-technical');
-            const discreteContCasualTarget = document.getElementById('discrete-cont-casual-target');
-
-            // Add click event listeners to each subject card
-            discreteMathCard.addEventListener('click', function () {
-                toggleVisibility(discreteContCasualTarget);
-                fetchAndReplaceContent(discreteContCasualTarget, '/api/discrete-math');
-            });
-            continuousMathCard.addEventListener('click', function () {
-                toggleVisibility(discreteContCasualTarget);
-                fetchAndReplaceContent(discreteContCasualTarget, '/api/continuous-math');
-            });
-            casualTechnicalCard.addEventListener('click', function () {
-                toggleVisibility(discreteContCasualTarget);
-                fetchAndReplaceContent(discreteContCasualTarget, '/api/casual-technical');
-            });
-
-            // quantum computing, information and communication and physics
-            const quantumComputingCard = document.getElementById('quantum-computing');
-            const infCommunicationCard = document.getElementById('inf-communication');
-            const physicsCard = document.getElementById('physics');
-
-            const quantumInfPhyTarget = document.getElementById('quantum-inf-phy-target');
-
-            quantumComputingCard.addEventListener('click', function () {
-                toggleVisibility(quantumInfPhyTarget);
-                fetchAndReplaceContent(quantumInfPhyTarget, '/api/quantum-computing');
-            });
-            infCommunicationCard.addEventListener('click', function () {
-                toggleVisibility(quantumInfPhyTarget);
-                fetchAndReplaceContent(quantumInfPhyTarget, '/api/inf-communication');
-            });
-            physicsCard.addEventListener('click', function () {
-                toggleVisibility(quantumInfPhyTarget);
-                fetchAndReplaceContent(quantumInfPhyTarget, '/api/physics');
-            });
-
-            // chemistry, artificial intelligence
-            const chemistryCard = document.getElementById('chemistry');
-            const aiCard = document.getElementById('ai');
-
-            const chemAiTarget = document.getElementById('chem-ai-target');
-
-            chemistryCard.addEventListener('click', function () {
-                toggleVisibility(chemAiTarget);
-                fetchAndReplaceContent(chemAiTarget, '/api/chemistry');
-            });
-
-            aiCard.addEventListener('click', function () {
-                toggleVisibility(chemAiTarget);
-                fetchAndReplaceContent(chemAiTarget, '/api/ai');
-            });
-
-            // biology, algorithm, japanese literature
-            const bioCard = document.getElementById('bio');
-            const algoCard = document.getElementById('algo');
-            const japaneseLiteratureCard = document.getElementById('japanese-literature');
-
-            const bioAlgoJapaneseTarget = document.getElementById('bio-algo-japanese-target');
-
-            bioCard.addEventListener('click', function () {
-                toggleVisibility(bioAlgoJapaneseTarget);
-                fetchAndReplaceContent(bioAlgoJapaneseTarget, '/api/bio');
-            });
-
-            algoCard.addEventListener('click', function () {
-                toggleVisibility(bioAlgoJapaneseTarget);
-                fetchAndReplaceContent(bioAlgoJapaneseTarget, '/api/algo');
-            });
-
-            japaneseLiteratureCard.addEventListener('click', function () {
-                toggleVisibility(bioAlgoJapaneseTarget);
-                fetchAndReplaceContent(bioAlgoJapaneseTarget, '/api/japanese-literature');
-            });
-
-            // casual non-literature, manga, bangla literature
-            const casualNonLiteratureCard = document.getElementById('casual-non-lit');
-            const mangaCard = document.getElementById('manga');
-            const banglaLiteratureCard = document.getElementById('bangla');
-
-            const casualNonLitMangaBanglaTarget = document.getElementById('casual-non-lit-manga-bangla-target');
-
-            casualNonLiteratureCard.addEventListener('click', function () {
-                toggleVisibility(casualNonLitMangaBanglaTarget);
-                fetchAndReplaceContent(casualNonLitMangaBanglaTarget, '/api/casual-non-lit');
-            });
-
-            mangaCard.addEventListener('click', function () {
-                toggleVisibility(casualNonLitMangaBanglaTarget);
-                fetchAndReplaceContent(casualNonLitMangaBanglaTarget, '/api/manga');
-            });
-
-            banglaLiteratureCard.addEventListener('click', function () {
-                toggleVisibility(casualNonLitMangaBanglaTarget);
-                fetchAndReplaceContent(casualNonLitMangaBanglaTarget, '/api/bangla');
-            });
-
-            // english literature, scientific papers, others
-
-            const englishLiteratureCard = document.getElementById('english');
-            const researchCard = document.getElementById('research');
-            const othersCard = document.getElementById('others');
-
-            const englishResearchOthersTarget = document.getElementById('english-research-others-target');
-
-            englishLiteratureCard.addEventListener('click', function () {
-                toggleVisibility(englishResearchOthersTarget);
-                fetchAndReplaceContent(englishResearchOthersTarget, '/api/english');
-            });
-
-            researchCard.addEventListener('click', function () {
-                toggleVisibility(englishResearchOthersTarget);
-                fetchAndReplaceContent(englishResearchOthersTarget, '/api/research');
-            });
-
-            othersCard.addEventListener('click', function () {
-                toggleVisibility(englishResearchOthersTarget);
-                fetchAndReplaceContent(englishResearchOthersTarget, '/api/others');
-            });
-        });
-
-    </script>
 </head>
 
 <body class="bg-neutral-950">
@@ -247,7 +86,7 @@
         <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center">
             <a href="/" class="text-2xl font-bold white-drop-shadow">Personal Bookmark</a>
             <div class="text-sm lg:text-base">
-                <a href="/" class="white-drop-shadow navbar-link">Book List</a>
+                <a href="/book-list" class="white-drop-shadow navbar-link">Book List</a>
                 <a href="/" class="white-drop-shadow navbar-link">Art Gallery</a>
                 <a href="https://myanimelist.net/animelist/ShamitFatin" class="white-drop-shadow navbar-link">Anime
                     List</a>
@@ -260,142 +99,191 @@
     <div id="main-content" class="pt-20 px-20 flex flex-col items-center">
         <h1 class="flex-none text-4xl font-bold text-gray-300 m-5">Explore</h1>
         <div class="grid xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-1 gap-8 w-5/6 m-5 mb-20">
-            <div class="bg-gray-500 spanner-2 subject-card" id="discrete-math">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/discrete-math"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Discrete Mathematics
                 <div class="svg-container">
                     <img src="explore/dis_math.png" class="w-10 h-10" alt="Discrete Mathematics">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-2 subject-card" id="continuous-math">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/continuous-math"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Continuous Mathematics
                 <div class="svg-container">
                     <img src="explore/cont_math.png" class="w-10 h-10" alt="Continuous Mathematics">
                 </div>
             </div>
 
-            <div class="bg-gray-500 subject-card" id="casual-technical">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/casual-technical"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Casual Technical
                 <div class="svg-container">
                     <img src="explore/cas_tech.png" class="w-10 h-10" alt="Casual Technical">
                 </div>
             </div>
 
-            <div class="spanner-5 book-list" id="discrete-cont-casual-target">
-            </div>
-
-            <div class="bg-gray-500 subject-card" id="quantum-computing">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/quantum-computing"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Quantum Computing
                 <div class="svg-container">
                     <img src="explore/quant.png" class="w-10 h-10" alt="Quantum Computing">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-2 subject-card" id="inf-communication">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/inf-communication"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Information and Communication
                 <div class="svg-container">
                     <img src="explore/inf.png" class="w-10 h-10" alt="Information and Communication">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-2 subject-card" id="physics">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/physics"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Physics
                 <div class="svg-container">
                     <img src="explore/phy.png" class="w-10 h-10" alt="Physics">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-5 book-list" id="quantum-inf-phy-target">
-
-            </div>
-
-            <div class="bg-gray-500 spanner-2 subject-card" id="chemistry">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/chemistry"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Chemistry
                 <div class="svg-container">
                     <img src="explore/chem.png" class="w-10 h-10" alt="Chemistry">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-3 subject-card" id="ai">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/ai"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Artificial Intelligence
                 <div class="svg-container">
                     <img src="explore/ai.png" class="w-10 h-10" alt="Artificial Intelligence">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-5 book-list" id="chem-ai-target">
-            </div>
-
-            <div class="bg-gray-500 subject-card" id="bio">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/bio"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Biology
                 <div class="svg-container">
                     <img src="explore/bio.png" class="w-10 h-10" alt="Biology">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-3 subject-card" id="algo">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/algo"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Algorithm
                 <div class="svg-container">
                     <img src="explore/algo.png" class="w-10 h-10" alt="Algorithm">
                 </div>
             </div>
 
-            <div class="bg-gray-500 subject-card" id="japanese-literature">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/japanese-literature"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Japanese Literature
                 <div class="svg-container">
                     <img src="explore/jap.png" class="w-10 h-10" alt="Japanese Literature">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-5 book-list" id="bio-algo-japanese-target">
-            </div>
-
-            <div class="bg-gray-500 spanner-2 subject-card" id="casual-non-lit">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/casual-non-lit"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Casual Non-Literature
                 <div class="svg-container">
                     <img src="explore/cas_non.png" class="w-10 h-10" alt="Casual Non-Literature">
                 </div>
             </div>
 
-            <div class="bg-gray-500 subject-card" id="manga">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/manga"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Manga
                 <div class="svg-container">
                     <img src="explore/manga.png" class="w-10 h-10" alt="Manga">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-2 subject-card" id="bangla">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/bangla"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Bangla Literature
                 <div class="svg-container">
                     <img src="explore/bangla.png" class="w-10 h-10" alt="Bangla Literature">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-5 book-list" id="casual-non-lit-manga-bangla-target">
-            </div>
-
-            <div class="bg-gray-500 subject-card" id="english">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/english"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 English Literature
                 <div class="svg-container">
                     <img src="explore/eng.png" class="w-10 h-10" alt="English Literature">
                 </div>
             </div>
 
-            <div class="bg-gray-500 spanner-3 subject-card" id="research">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/research"
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Scientific Papers
                 <div class="svg-container">
                     <img src="explore/research.png" class="w-10 h-10" alt="Scientific Papers">
                 </div>
             </div>
 
-            <div class="bg-gray-500 subject-card" id="others">
+            <div class="bg-gray-500 spanner subject-card" 
+                hx-get="/api/others"    
+                hx-swap="outerHTML" 
+                hx-trigger="click"
+            >
                 Others
                 <div class="svg-container">
                     <img src="explore/misc.png" class="w-10 h-10" alt="Others">
                 </div>
-            </div>
-
-            <div class="bg-gray-500 spanner-5 book-list" id="english-research-others-target">
             </div>
         </div>
     </div>
@@ -409,6 +297,7 @@
                 <p class="text-sm">Made with ❤️ by Shamit Fatin</p>
             </div>
         </div>
+    </div>
 </body>
 
 </html>

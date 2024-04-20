@@ -20,14 +20,13 @@ struct ContentKey {
 }
 
 fn list_to_html(list: Vec<BookItem>) -> String {
-    let mut html = String::from("<div class='flex flex-col'>");
+    let mut html = String::from("");
     for book in list {
         html.push_str(&format!(
-            "<div><a href=\"/notes/{}/0\">{} : {}</a></div>",
+            "<a href=\"notes/{}/0\" class=\"bg-gray-500 spanner subject-card\">{}<div class=\"svg-container\">{}</div></a>",
             book.book_id, book.book_title, book.author
         ));
     }
-    html.push_str("</div>");
 
     html
 }
@@ -183,6 +182,83 @@ async fn others() -> HttpResponse {
     HttpResponse::Ok().body(list_to_html(list))
 }
 
+fn book_genre_mapping(genre: &str) -> &str {
+    match genre {
+        "Discrete Mathematics" => "dis_math",
+        "Continuous Mathematics" => "cont_math",
+        "Casual Technical" => "cas_tech",
+        "Quantum Computing" => "quant",
+        "Information and Communication" => "inf",
+        "Physics" => "phy",
+        "Chemistry" => "chem",
+        "Artificial Intelligence" => "ai",
+        "Biology" => "bio",
+        "Algorithm" => "algo",
+        "Japanese Literature" => "jap",
+        "Casual Non-Literature" => "cas_non",
+        "Manga" => "manga",
+        "Bangla Literature" => "bangla",
+        "English Literature" => "eng",
+        "Scientific Papers" => "research",
+        "Others" => "misc",
+        _ => "misc",
+    }
+}
+
+// Book List Api
+async fn book_list() -> HttpResponse {
+    let mongodb_uri = env::var("MONGOURI").expect("MONGODB_URI must be set");
+    let client = mongodb::Client::with_uri_str(&mongodb_uri).await.unwrap();
+    let db = client.database("personal-bookmark");
+    let collection = db.collection::<BookItem>("books");
+
+    println!("Querying the database for finding book list");
+
+    let mut cursor = collection
+        .find(None, None)
+        .await
+        .expect("Error finding documents");
+
+    let mut books = Vec::new();
+    while let Some(book) = cursor
+        .try_next()
+        .await
+        .expect("Error getting next document")
+    {
+        books.push(book);
+    }
+
+    let mut html = String::from("");
+    for book in books {
+        html.push_str(&format!(
+            "<a class=\"book-card\" href=\"notes/{}/0\">
+                <div class=\"flex flex-row items-center space-x-4\">
+                    <div class=\"svg-container\">
+                        <img src=\"explore/{}.png\" class=\"w-10 h-10\" alt=\"{}\">
+                    </div>
+                    <div class=\"flex flex-col\">
+                        <div class=\"book-name\">{}</div>
+                        <div class=\"book-author\">{}</div>
+                    </div>
+                </div>
+                <div class = \"flex flex-row items-center space-x-4\">
+                    <div class=\"svg-container\">
+                        <img src=\"progress/50.png\" class=\"w-10 h-10\" alt=\"50\">
+                    </div>
+                    <div class=\"book-author\">50% Complete</div>
+                </div>
+            </a>",
+            book.book_id,
+            book_genre_mapping(&book.genre),
+            book.genre,
+            book.book_title,
+            book.author
+        ));
+    }
+
+    HttpResponse::Ok().body(html)
+}
+
 // Create a function to configure the API routes
 pub fn api_routes(cfg: &mut web::ServiceConfig) {
     cfg.service(
@@ -203,6 +279,7 @@ pub fn api_routes(cfg: &mut web::ServiceConfig) {
             .route("/bangla", web::get().to(bangla_lit))
             .route("/english", web::get().to(english_lit))
             .route("/research", web::get().to(research))
-            .route("/others", web::get().to(others)),
+            .route("/others", web::get().to(others))
+            .route("/get-books", web::get().to(book_list)),
     );
 }
