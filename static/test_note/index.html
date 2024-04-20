@@ -9,19 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.5.0"></script>
     <link rel="icon" type="image/png" href="favicon.png">
     <style type="text/tailwindcss">
-        @layer components {
-            @media (prefers-color-scheme: dark) {
-                body.dark {
-                    @apply bg-gray-900 text-gray-200;
-                }
-            }
-        }
         @layer utilities {
-            body {
-                @apply bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-200;
-                @apply font-sans antialiased;
-                @apply text-sm md:text-base;
-            }
             .spoiler {
                 @apply bg-gray-300 dark:bg-gray-700 text-gray-300 dark:text-gray-700;
             }
@@ -100,8 +88,8 @@
             .block_code {
                 @apply bg-gray-200 dark:bg-gray-700 p-4 rounded shadow;
             }
-            .mobile_hidden{
-                @apply hidden md:block md:w-100;
+            .mobile-hidden {
+                @apply hidden md:block;
             }
         }   
     </style>
@@ -183,6 +171,13 @@
             html.classList.toggle('dark');
             localStorage.setItem('color-theme', html.classList.contains('dark') ? 'dark' : 'light');
         }
+
+        function showList() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+            const mainContent = document.getElementById('main_content');
+            mainContent.classList.toggle('mobile-hidden');
+        }
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -242,64 +237,49 @@
     <div class="flex flex-col h-screen
                 text-xs md:text-base">
         <div class="h-[8vh] p-4
-                    bg-gray-200 dark:bg-gray-900
-                    text-gray-800 dark:text-gray-400
+                    bg-neutral-200 dark:bg-neutral-900
+                    text-neutral-800 dark:text-neutral-400
                     shadow-md">
             <!-- Top bar -->
             <nav class="flex items-center justify-between">
-                <a href="/" class="text-2xl font-bold white-drop-shadow">Personal Bookmark</a>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onclick="colorModeSwitch()">
-                    Switch Color Mode
+                <button class="white-drop-shadow py-2 px-4 rounded" onclick="showList()">
+                    List
+                </button>
+                <a href="/"
+                    class="text-base md:text-2xl font-bold white-drop-shadow hover:no-underline text-neutral-800 dark:text-neutral-400">
+                    Personal Bookmark</a>
+                <button class="white-drop-shadow py-2 px-4 rounded" onclick="colorModeSwitch()">
+                    Mode
                 </button>
             </nav>
         </div>
         <div class="flex flex-row items-center
                     bg-gray-100 dark:bg-gray-950">
-            <div id="illusion" class="h-[92vh] w-0 p-0 md:p-2 
-                                    bg-gray-300 dark:bg-gray-800">
-
-            </div>
             <div id="sidebar" class="h-[92vh] w-full md:w-1/6 
                         hidden overflow-x-auto
-                        p-4 pl-0 bg-gray-300 dark:bg-gray-800">
+                        pl-0 bg-neutral-300 dark:bg-neutral-800
+                        text-neutral-800 dark:text-neutral-400">
                 <!-- Side bar -->
-                <!-- Auto-generated content -->
-                <div class="p-4">
-                    <div class="flex flex-col space-y-4">
-                        <a href="/notes/0/0">Chapter 1</a>
-                        <a href="/notes/0/0">Chapter 1</a>
-                        <a href="/notes/0/0">Chapter 1</a>
-                    </div>
+                <h1 class="text-center md:text-start p-4">Content</h1>
+                <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700">
+                <div class="flex flex-col items-center md:items-start space-y-4 p-4">
+                    <!-- Auto-generated content -->
+                    <a class="hover:no-underline text-neutral-800 dark:text-neutral-400 hover:pl-4"
+                        href="/notes/0/0">Chapter 1</a>
+                    <a class="hover:no-underline text-neutral-800 dark:text-neutral-400 hover:pl-4"
+                        href="/notes/0/0">Chapter 2</a>
+                    <a class="hover:no-underline text-neutral-800 dark:text-neutral-400 hover:pl-4"
+                        href="/notes/0/0">Chapter 3</a>
+                    <!-- Auto-generated content -->
                 </div>
             </div>
-            <div class="flex flex-col items-start justify-center">
-                <div class="w-4 h-4 bg-gray-300 dark:bg-gray-800">
-                    <div class="w-4 h-4 rounded-bl-lg bg-gray-300 dark:bg-gray-950">
-                    </div>
-                </div>
-                <div>
-                    <!-- Collapse Button -->
-                    <button id="collapseBtn" class="w-12 h-24
-                            bg-gray-300 dark:bg-gray-800 text-gray-800 font-bold py-2 px-4 ml-0 rounded-r-lg "
-                        onclick="collapseSidebar()">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAyElEQVR4nO2ZMQpCMRBEnydURLHQs1soCh+9gcKImMLiFz9hN6SYB4E0A7PkVVkwpj+CveApuAk2WZlUBCvBQ6ByXoJDdKYLgumv1NJhqjPpCLalyOJiLZkuCHYzxd6CU2SmC/Iw+GXSsWZYs3ysGdYsH2uGNcvHmmHN8rFmDKhZ+VmZK3WMzKTiIfBLxGGdsE5xWCesUxzWCesUh3XCOsVhnRhHp3XDMrQ6k47g2rCers6kI7jXFmrJpKOfJhfB+XvPyhjDuHwAusAr1c0FLMEAAAAASUVORK5CYII="
-                            class="w-6 h-6" alt="Collapse">
-                    </button>
-                </div>
-                <div class="w-4 h-4 bg-gray-300 dark:bg-gray-800">
-                    <div class="w-4 h-4 rounded-tl-lg bg-gray-300 dark:bg-gray-950">
-                    </div>
-                </div>
-            </div>
-            <div class="h-[92vh] flex-1 p-10 overflow-x-auto
+            <div class="h-[92vh] flex-1 p-0 md:p-10 overflow-x-auto
                         flex flex-row
                         items-start justify-center
                         bg-gray-100 dark:bg-gray-950
-                        text-gray-800 dark:text-gray-200"
-                id="main_content">
+                        text-gray-800 dark:text-gray-200">
                 <!-- Main body -->
-                <div class="w-full md:w-3/4 flex flex-col space-y-6">
+                <div class="w-full md:w-3/4 flex flex-col space-y-6 px-10" id="main_content">
                     <!-- Auto-generated content -->
                     <h1>Title</h1>
 
@@ -420,6 +400,16 @@ int main() {
                     <div id=14121665374071032973 class="comment_explain hidden">This comment explains the text</div>
 
                     <!-- Auto-generated content -->
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="fixed bottom-0 w-full bg-neutral-200 dark:bg-neutral-950 text-gray-800 dark:text-gray-400 p-4 z-10">
+            <div class="container mx-auto flex justify-between items-center">
+                <div>
+                    <p class="text-sm">© 2024 Personal Bookmark</p>
+                </div>
+                <div>
+                    <p class="text-sm">Made with ❤️ by Shamit Fatin</p>
                 </div>
             </div>
         </div>

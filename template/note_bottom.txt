@@ -1,4 +1,14 @@
-                    <!-- Auto-generated content -->
+ <!-- Auto-generated content -->
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="fixed bottom-0 w-full bg-neutral-200 dark:bg-neutral-950 text-gray-800 dark:text-gray-400 p-4 z-10">
+            <div class="container mx-auto flex justify-between items-center">
+                <div>
+                    <p class="text-sm">© 2024 Personal Bookmark</p>
+                </div>
+                <div>
+                    <p class="text-sm">Made with ❤️ by Shamit Fatin</p>
                 </div>
             </div>
         </div>

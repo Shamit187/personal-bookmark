@@ -39,18 +39,13 @@ struct Info {
 }
 
 fn generate_table_of_content(book: BookItem) -> String {
-    let mut toc_html = String::from("<div class=\"toc\">");
-    toc_html.push_str("<ul>");
+    let mut toc_html = String::from("");
     for content in &book.content {
-        toc_html.push_str("<li>");
         toc_html.push_str(&format!(
-            "<a href=\"/notes/{}/{}\">{}</a>",
+            "<a class=\"hover:no-underline text-neutral-800 dark:text-neutral-400 hover:pl-4\"href=\"/notes/{}/{}\">{}</a>",
             book.book_id, content.content_id, content.title
         ));
-        toc_html.push_str("</li>");
     }
-    toc_html.push_str("</ul>");
-    toc_html.push_str("</div>");
 
     toc_html
 }
