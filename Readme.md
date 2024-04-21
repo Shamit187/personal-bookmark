@@ -29,35 +29,35 @@ TailwindCSS is a utility-first CSS framework that enables you to quickly build c
 ## Roadmap
 
 - [X] **Database Integration**: Integrate a database to store book and note data, allowing for persistent storage and retrieval.
-- [ ] **Add more Type of Content Support in Note**: items that I wish to add:
+- [x] **Add more Type of Content Support in Note**: items that I wish to add:
   - [X] Title
   - [X] Text
-  - [ ] Image/ Figures
-  - [ ] Table
-  - [ ] List
-  - [ ] Highlighted Text
-  - [ ] Author
-  - [ ] Date
-  - [ ] Quote
-  - [ ] Definition
+  - [x] Image/ Figures
+  - [x] Table
+  - [x] List
+  - [x] Highlighted Text
+  - [x] Author
+  - [x] Date
+  - [x] Quote
+  - [x] Definition
 - [X] **Figuring out using Latex in HTMX**: Implement a way to use Latex in HTMX to display mathematical equations and formulas in the notes.
 - [ ] **Progress Visualization**: Visualize my progress with each book using charts and graphs, providing a clear overview of my reading habits and patterns.
 - [ ] **Forum Integration**: Integrate a forum to discuss books and share insights with other users, creating a community around reading and learning.
 
 ## Pages
 
-* [ ] "/"
+* [x] "/"
   * [X] basic stuff
-  * [ ] background image
-* [ ] "/explore"
+  * [x] background image
+* [x] "/explore"
   * [X] basic menu
-  * [ ] click to show every book in that genre
-  * [ ] write api for that
+  * [x] click to show every book in that genre
+  * [x] write api for that
 * [X] "/test_note"
-* [ ] "/notes/{book_id}/{chapter}/{subchapter}"
-  * [ ] basic stuff
-  * [ ] change color mode logo
-  * [ ] if chapter == -1 : show thoughts on book
+* [x] "/notes/{book_id}/{note_id}"
+  * [x] basic stuff
+  * [x] change color mode logo
+  * [ ] if chapter == 0 : show thoughts on book
 * [ ] "/book_search/{search_key}"
 
 ## Host
