@@ -55,7 +55,6 @@
         ::-webkit-scrollbar-thumb {
             background: #888;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
@@ -69,9 +68,9 @@
 
 <body class="bg-neutral-950">
     <div id="navbar" class="fixed bg-neutral-950 shadow-md w-full text-gray-400 p-1 lg:p-4 z-10">
-        <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center">
+        <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center space-y-4">
             <a href="/" class="text-2xl font-bold white-drop-shadow">Personal Bookmark</a>
-            <div class="text-sm lg:text-base">
+            <div class="text-xs lg:text-sm">
                 <a href="/book-list" class="white-drop-shadow navbar-link">Book List</a>
                 <a href="/" class="white-drop-shadow navbar-link">Art Gallery</a>
                 <a href="https://myanimelist.net/animelist/ShamitFatin" class="white-drop-shadow navbar-link">Anime
@@ -89,23 +88,6 @@
                 hx-swap="outerHTML">
                 <!-- ... -->
             </svg>
-            <!-- <a class="book-card" href="notes/2/0">
-            <div class="flex flex-row items-center space-x-4">
-                <div class="svg-container">
-                    <img src="explore/quant.png" class="w-10 h-10" alt="Quantum Computing">
-                </div>
-                <div class="flex flex-col">
-                    <div class="book-name">Book Name</div>
-                    <div class="book-author">Author</div>
-                </div>
-            </div>
-            <div class = "flex flex-row items-center space-x-4">
-                <div class="svg-container">
-                    <img src="progress/10.png" class="w-10 h-10" alt="Quantum Computing">
-                </div>
-                <div class="book-author">10% Complete</div>
-            </div>
-        </a> -->
         </div>
     </div>
 

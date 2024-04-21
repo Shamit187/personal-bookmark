@@ -5,6 +5,7 @@ use std::fs;
 use std::env;
 use futures::stream::TryStreamExt;
 use mongodb::bson::doc;
+use std::time::Instant;
 
 use crate::markdown_to_html::start;
 
@@ -110,7 +111,7 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
         }
     };
     let toc_html = generate_table_of_content(book);
-
+    
     // if content_id is 0, return the table of content
     if info.content_id == 0 {
         let html_content = format!(
@@ -154,12 +155,13 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
             }
         }
     };
+    let start_time = Instant::now();
     let note_html = start(note.markdown_content);
-
+    let elapsed_html = format!("<div class=\"author\">Processing time: {:?}</div>", start_time.elapsed());
     // Generate HTML content dynamically
     let html_content = format!(
-        "{} {} {} {} {}",
-        note_top_html, toc_html, note_middle_html, note_html, note_bottom_content
+        "{} {} {} {} {} {}",
+        note_top_html, toc_html, note_middle_html, note_html, elapsed_html, note_bottom_content
     );
 
     Ok(HttpResponse::Ok()

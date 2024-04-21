@@ -83,9 +83,9 @@
 
 <body class="bg-neutral-950">
     <div id="navbar" class="fixed bg-neutral-950 shadow-md w-full text-gray-400 p-1 lg:p-4 z-10">
-        <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center">
+        <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center space-y-4">
             <a href="/" class="text-2xl font-bold white-drop-shadow">Personal Bookmark</a>
-            <div class="text-sm lg:text-base">
+            <div class="text-xs lg:text-sm">
                 <a href="/book-list" class="white-drop-shadow navbar-link">Book List</a>
                 <a href="/" class="white-drop-shadow navbar-link">Art Gallery</a>
                 <a href="https://myanimelist.net/animelist/ShamitFatin" class="white-drop-shadow navbar-link">Anime
@@ -98,7 +98,7 @@
 
     <div id="main-content" class="pt-20 px-20 flex flex-col items-center">
         <h1 class="flex-none text-4xl font-bold text-gray-300 m-5">Explore</h1>
-        <div class="grid xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-1 gap-8 w-5/6 m-5 mb-20">
+        <div class="grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-3 gap-2 md:gap-8 w-full lg:w-5/6 m-5 mb-20">
             <div class="bg-gray-500 spanner subject-card" 
                 hx-get="/api/discrete-math"
                 hx-swap="outerHTML" 
