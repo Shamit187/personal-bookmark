@@ -10,6 +10,8 @@ struct BookItem {
     book_title: String,
     author: String,
     genre: String,
+    total_content: u32,
+    completed_content: u32,
     content: Vec<ContentKey>,
 }
 
@@ -205,6 +207,41 @@ fn book_genre_mapping(genre: &str) -> &str {
     }
 }
 
+fn process_amount(total_content: u32, completed_content: u32) -> f64 {
+    if total_content != 0 {
+        (completed_content as f64 / total_content as f64) * 100.0
+    } else {
+        0 as f64
+    }
+}
+
+fn process_amount_round(total_content: u32, completed_content: u32) -> &'static str {
+    let progress_percentage = process_amount(total_content, completed_content);
+    if progress_percentage == 0.0 {
+        "0"
+    } else if progress_percentage <= 10.0 {
+        "10"
+    } else if progress_percentage <= 20.0 {
+        "20"
+    } else if progress_percentage <= 30.0 {
+        "30"
+    } else if progress_percentage <= 40.0 {
+        "40"
+    } else if progress_percentage <= 50.0 {
+        "50"
+    } else if progress_percentage <= 60.0 {
+        "60"
+    } else if progress_percentage <= 70.0 {
+        "70"
+    } else if progress_percentage <= 80.0 {
+        "80"
+    } else if progress_percentage <= 90.0 {
+        "90"
+    } else {
+        "100"
+    }
+}
+
 // Book List Api
 async fn book_list() -> HttpResponse {
     let mongodb_uri = env::var("MONGOURI").expect("MONGODB_URI must be set");
@@ -243,16 +280,18 @@ async fn book_list() -> HttpResponse {
                 </div>
                 <div class = \"flex flex-row items-center space-x-4\">
                     <div class=\"svg-container\">
-                        <img src=\"progress/50.png\" class=\"w-10 h-10\" alt=\"50\">
+                        <img src=\"progress/{}.png\" class=\"w-10 h-10\" alt=\"50\">
                     </div>
-                    <div class=\"book-author\">50% Complete</div>
+                    <div class=\"book-author\">{}% Complete</div>
                 </div>
             </a>",
             book.book_id,
             book_genre_mapping(&book.genre),
             book.genre,
             book.book_title,
-            book.author
+            book.author,
+            process_amount_round(book.total_content, book.completed_content),
+            process_amount(book.total_content, book.completed_content)
         ));
     }
 

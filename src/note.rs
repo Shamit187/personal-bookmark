@@ -15,6 +15,8 @@ struct BookItem {
     book_title: String,
     author: String,
     genre: String,
+    total_content: u32,
+    completed_content: u32,
     content: Vec<ContentKey>,
 }
 
@@ -90,6 +92,8 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
                 book_title: String::from("Sorry, no book found 😔"),
                 author: String::from(""),
                 genre: String::from(""),
+                total_content: 0,
+                completed_content: 0,
                 content: vec![ContentKey {
                     title: String::from(""),
                     content_id: 0,
@@ -103,6 +107,8 @@ async fn index(info: web::Path<Info>) -> Result<HttpResponse> {
                 book_title: String::from("Sorry, no book found 😔"),
                 author: String::from(""),
                 genre: String::from(""),
+                total_content: 0,
+                completed_content: 0,
                 content: vec![ContentKey {
                     title: String::from(""),
                     content_id: 0,
